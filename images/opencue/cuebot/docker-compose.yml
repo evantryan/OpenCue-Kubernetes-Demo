@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  cuebot:
+    image: ${REGISTRY_SERVER}/demo_cuebot:latest
+    build:
+      context: ./
+      dockerfile: ./cuebot.dockerfile
+      args:
+        OPENCUE_MAJOR : 0
+        OPENCUE_MINOR : 21
+        OPENCUE_PATCH : 13
+        CUEBOT_CUE_PORT : 8443
+        CUEBOT_RQD_PORT : 8444

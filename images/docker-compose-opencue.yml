@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  cuebot:
+    image: ${REGISTRY_SERVER}/demo_cuebot:latest
+    build:
+      context: ./opencue/cuebot
+      dockerfile: ./cuebot.dockerfile
+      args:
+        OPENCUE_MAJOR : ${OPENCUE_MAJOR}
+        OPENCUE_MINOR : ${OPENCUE_MINOR}
+        OPENCUE_PATCH : ${OPENCUE_PATCH}
+        CUEBOT_CUE_PORT : 8443
+        CUEBOT_RQD_PORT : 8444
+  opencue_postgres:
+    image: ${REGISTRY_SERVER}/demo_opencue_postgres:latest
+    build:
+      context: ./opencue/db
+      dockerfile: ./db.dockerfile
+      args:
+        OPENCUE_MAJOR : ${OPENCUE_MAJOR}
+        OPENCUE_MINOR : ${OPENCUE_MINOR}
+        OPENCUE_PATCH : ${OPENCUE_PATCH}
+  rqd:
+    image: ${REGISTRY_SERVER}/demo_rqd:latest
+    build:
+      context: ./opencue/rqd
+      dockerfile: ./rqd.dockerfile
+      args:
+        OPENCUE_MAJOR : ${OPENCUE_MAJOR}
+        OPENCUE_MINOR : ${OPENCUE_MINOR}
+        OPENCUE_PATCH : ${OPENCUE_PATCH}

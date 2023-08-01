@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    descriptor: rqd
+  name: rqd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      descriptor: rqd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        descriptor: rqd
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: descriptor
+                operator: In
+                values:
+                - rqd
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - env:
+        - name: CUEBOT_HOSTNAME
+          value: cuebot
+        image: $REGISTRY_SERVER/$RQD_IMAGE:latest
+        name: rqd
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - SYS_ADMIN
+        ports:
+        - containerPort: 8444
+        resources:
+          limits:
+            cpu: "6"
+            memory: 120Gi
+          requests:
+            cpu: "3"
+            memory: 8Gi
+
+        # Mount the NFS volume in the container
+        volumeMounts:
+        - name: nfs-volume
+          mountPath: $NFS_CONTAINER_PATH
+
+      restartPolicy: Always
+      volumes:
+        - name: nfs-volume
+          nfs: 
+            server: $NFS_SERVER
+            path: $NFS_MOUNT_PATH
+status: {}

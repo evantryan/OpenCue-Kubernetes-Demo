@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    descriptor: cuebot
+  name: cuebot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      descriptor: cuebot
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        descriptor: cuebot
+    spec:
+      containers:
+      - args:
+        - --datasource.cue-data-source.jdbc-url=jdbc:postgresql://db/cuebot
+        - --datasource.cue-data-source.username=cuebot
+        - --datasource.cue-data-source.password=db_password
+        env:
+        - name: CUE_FS_ROOT
+          value: $NFS_CONTAINER_PATH
+        - name: CUE_FRAME_LOG_DIR
+          value: $NFS_CONTAINER_PATH/logs
+        image: $REGISTRY_SERVER/demo_cuebot:latest
+        name: cuebot
+        volumeMounts:
+        - name: nfs-volume
+          mountPath: $NFS_CONTAINER_PATH
+        ports:
+        - containerPort: 8443
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+      volumes:
+        - name: nfs-volume
+          nfs: 
+            server: $NFS_SERVER
+            path: $NFS_MOUNT_PATH
+status: {}

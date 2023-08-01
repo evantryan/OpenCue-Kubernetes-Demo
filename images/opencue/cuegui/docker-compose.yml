@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  app:
+    image: demo_cuegui:latest
+    build:
+      context: .
+      dockerfile: gui.dockerfile
+      args:
+        OPENCUE_MAJOR : 0
+        OPENCUE_MINOR : 21
+        OPENCUE_PATCH : 13
+    user: ${CURRENT_UID}:${CURRENT_GID}
+    working_dir: $HOME
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QTWEBENGINE_DISABLE_SANDBOX=1
+      - PYTEST_QT_API=pyside2
+      - CUEBOT_HOSTS=localhost
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - $HOME:$HOME
+
+    command: cuegui
+  

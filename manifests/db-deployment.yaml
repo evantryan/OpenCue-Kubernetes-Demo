@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    descriptor: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      descriptor: db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        descriptor: db
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: cuebot
+        - name: POSTGRES_PASSWORD
+          value: db_password
+        - name: POSTGRES_USER
+          value: cuebot
+        image: $REGISTRY_SERVER/demo_opencue_postgres:latest
+        name: db
+        ports:
+        - containerPort: 5432
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/
+          name: db-claim0
+      restartPolicy: Always
+      volumes:
+      - name: db-claim0
+        persistentVolumeClaim:
+          claimName: db-claim0
+status: {}
