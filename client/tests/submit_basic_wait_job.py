@@ -28,4 +28,7 @@ ol = outline.Outline(
 layer = outline.modules.shell.Shell(
     'echo_frame', command=['echo', '#IFRAME#', '&&', 'sleep', '45', '&&', 'echo', 'im done!'], chunk=1, threads=1, range='1-100x1')
 ol.add_layer(layer)
-outline.cuerun.launch(ol, use_pycuerun=False)
+jobs = outline.cuerun.launch(ol, use_pycuerun=False)
+
+for job in jobs:
+    print(f"Submitted {job.name()}")

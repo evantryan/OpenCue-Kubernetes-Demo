@@ -14,4 +14,5 @@
 
 ## Submit Test Jobs
 
-    CUEBOT_HOSTS=localhost python submit_basic_wait_job.py
+    CUEBOT_HOSTS=localhost python tests/submit_basic_wait_job.py
+

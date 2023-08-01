@@ -12,7 +12,7 @@ This setup assumes the following is already good to go.
 
 ## Get started!
 
-1. configure the setup
+1. configure the environment
 2. build images
 3. deploy
 4. test
