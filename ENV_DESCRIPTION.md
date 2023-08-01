@@ -1,21 +1,30 @@
-# Environnment Detail
+# Environnment Description
 
 ## opencue version
 
-At the writing of this, the most recent release of opencue was 0.22.14.
+This is split into `OPENCUE_MAJOR`, `OPENCUE_MINOR`, `OPENCUE_PATH`. right now the latest version is 0.22.14 so the values would be 0, 22, and 14 respectively.
 
 ## registry server
 
-The registry server is the url to the server you'll use to push images to and deploy images from.
+`REGISTRY_SERVER` is the url to the server you'll use to push images to and deploy images from.
+
+for example, `registry.hub.docker.com/library` or leave blank if you are using dockerhub or `your_registry_host_name`.
+
 
 ## nfs server
 
 `NFS_SERVER` is the hostname for the nfs server you want to use for the demo
+`NFS_MOUNT_PATH` is the path on the server that is exported. you can get a list of exports with `showmount -e $NFS_SERVER`
+`NFS_CONTAINER_PATH` is the path in inside pods. for example, `/projects/shows/testing/`
 
+## kubectl command
+    
+`KUBECTL_CMD` is however you call `kubectl`. If you are using something like microk8s, the value here would be `microk8s kubectl` if you haven't already aliased it
 
-    NFS_SERVER=fourage
-    NFS_MOUNT_PATH=/path/to/nfs/remote/dir
-    NFS_CONTAINER_PATH=/path/to/mount/in/deployed/pods
-    KUBECTL_CMD=kubectl
-    RQD_IMAGE=demo_rqd
-    FOUNDRY_NUKE_LIC_HOST=4101@license_server
+## RQD image name
+
+`RQD_IMAGE` is the name of the image you want to test. Use `demo_rqd` here if you only built the opencue images. If you built the 'rendernode' images, other options are `demo_nuke`, `demo_blender`, and `demo_ffpeg`.
+
+## Nuke License
+
+`FOUNDRY_NUKE_LIC_HOST`- If you plan on testing nuke, the license can go here. for example, `4101@license_server_hostname_or_ip`
