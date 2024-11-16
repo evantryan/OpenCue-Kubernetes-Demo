@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-base-rockylinux8
+FROM nvidia/cuda:12.6.2-base-rockylinux9
 
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES},display
 
@@ -13,9 +13,9 @@ RUN yum -y install \
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --upgrade setuptools
 
-ARG OPENCUE_MAJOR=0
-ARG OPENCUE_MINOR=21
-ARG OPENCUE_PATCH=13
+ARG OPENCUE_MAJOR=1
+ARG OPENCUE_MINOR=0
+ARG OPENCUE_PATCH=0
 ARG OPENCUE_VERSION=${OPENCUE_MAJOR}.${OPENCUE_MINOR}.${OPENCUE_PATCH}
 
 WORKDIR /opt/opencue

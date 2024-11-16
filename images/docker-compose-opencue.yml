@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   cuebot:
     image: ${REGISTRY_SERVER}/demo_cuebot:latest

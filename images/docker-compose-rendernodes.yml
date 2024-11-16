@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   blender_rqd:
     image: ${REGISTRY_SERVER}/demo_blender:latest
@@ -7,9 +5,9 @@ services:
       context: ./rendernode/blender
       dockerfile: ./blender.dockerfile
       args:
-        BLENDER_MAJOR : 3
-        BLENDER_MINOR : 6
-        BLENDER_PATCH : 1
+        BLENDER_MAJOR : 4
+        BLENDER_MINOR : 2
+        BLENDER_PATCH : 3
         REGISTRY_SERVER : ${REGISTRY_SERVER}
   ffmpeg_rqd:
     image: ${REGISTRY_SERVER}/demo_ffmpeg:latest
@@ -18,11 +16,3 @@ services:
       dockerfile: ./ffmpeg.dockerfile
       args:
         REGISTRY_SERVER : ${REGISTRY_SERVER}
-  nuke_rqd:
-    image: ${REGISTRY_SERVER}/demo_nuke:latest
-    build:
-      context: ./rendernode/nuke
-      dockerfile: ./nuke.dockerfile
-      args:
-        REGISTRY_SERVER : ${REGISTRY_SERVER}
-        foundry_LICENSE : ${FOUNDRY_NUKE_LIC_HOST}

@@ -1,6 +1,6 @@
-opencue_version_major=0
-opencue_version_minor=22
-opencue_version_patch=14
+opencue_version_major=1
+opencue_version_minor=0
+opencue_version_patch=0
 opencue_version=$opencue_version_major.$opencue_version_minor.$opencue_version_patch
 root_dir=$(pwd)
 
@@ -9,6 +9,7 @@ declare -a packages=(
                   "pyoutline"
                   "cuegui"
                   "cuesubmit"
+                  "cueadmin"
                  )
 
 python3 -m venv venv

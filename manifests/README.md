@@ -34,7 +34,7 @@ Scaling rqd can be done with
 
     kubectl scale --replicas 6 deployment rqd
 
-Once `1/1` is achieved, the cuebot port can be forwarded/exposed with the following command. Note that this can also be achieved using ingress, NodePort or something like inlets. This is needed to access cuebot on localhost. Port-forward doesn't detatch, so you'll need another terminal while this is running.
+Once `deployment.apps/cuebot   1/1` is achieved, the cuebot port can be forwarded/exposed with the following command. Note that this can also be achieved using ingress, NodePort or something like inlets. This is needed to access cuebot on localhost. Port-forward doesn't detach, so you'll need another terminal while this is running.
 
     kubectl port-forward --address=0.0.0.0 service/cuebot 8443:8443
 

@@ -22,8 +22,4 @@ for example, `registry.hub.docker.com/library` or leave blank if you are using d
 
 ## RQD image name
 
-`RQD_IMAGE` is the name of the image you want to test. Use `demo_rqd` here if you only built the opencue images. If you built the 'rendernode' images, other options are `demo_nuke`, `demo_blender`, and `demo_ffmpeg`.
-
-## Nuke License
-
-`FOUNDRY_NUKE_LIC_HOST`- If you plan on testing nuke, the license can go here. for example, `4101@license_server_hostname_or_ip`.
+`RQD_IMAGE` is the name of the image you want to test. Use `demo_rqd` here if you only built the opencue images. If you built the 'rendernode' images, other options are `demo_blender` and `demo_ffmpeg`.
